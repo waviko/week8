@@ -33,16 +33,16 @@ public class MainActivity extends AppCompatActivity {
         output = findViewById(R.id.result);
     }
 
-    private void readInputs(){
+    private boolean readInputs(){
         EditText textNumber1 = findViewById(R.id.text_number1);
         EditText textNumber2 = findViewById(R.id.text_number2);
 
         try {
             number1 = Double.parseDouble(textNumber1.getText().toString());
             number2 = Double.parseDouble(textNumber2.getText().toString());
+            return true;
         } catch (NumberFormatException e) {
-            // Handle invalid input
-            return;
+            return false;
         }
     }
 
@@ -55,17 +55,29 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onPlus(View view) {
-        readInputs();
+        boolean succeed = readInputs();
+        if (!succeed) {
+            output.setText("Invalid input");
+            return;
+        }
         output.setText(formatResult(number1 + number2));
     }
 
     public void onMinus(View view) {
-        readInputs();
+        boolean succeed = readInputs();
+        if (!succeed) {
+            output.setText("Invalid input");
+            return;
+        }
         output.setText(formatResult(number1 - number2));
     }
 
     public void onMultiply(View view) {
-        readInputs();
+        boolean succeed = readInputs();
+        if (!succeed) {
+            output.setText("Invalid input");
+            return;
+        }
         output.setText(formatResult(number1 * number2));
     }
 
